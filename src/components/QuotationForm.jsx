@@ -1,25 +1,17 @@
 import React, { useState } from 'react';
 import { db } from '../firebase';
 import { collection, addDoc } from 'firebase/firestore';
-import '../index.css'; // Ensure Tailwind CSS is imported
+import '../index.css';
+import QuotationItemList from '../components/QuotationItemList';
 
 function QuotationForm() {
   const [formData, setFormData] = useState({
     quotationNo: 'A00001',
     quotationDate: new Date().toISOString().split('T')[0],
-    from: {
-      businessName: '',
-      phone: '',
-      address: '',
-      email: ''
-    },
-    to: {
-      clientName: '',
-      phone: '',
-      address: '',
-      email: ''
-    },
-    notes: ''
+    from: { businessName: '', phone: '', address: '', email: '' },
+    to: { clientName: '', phone: '', address: '', email: '' },
+    notes: '',
+    items: []
   });
 
   const handleChange = (section, field, value) => {
@@ -32,6 +24,24 @@ function QuotationForm() {
     }));
   };
 
+  const addItem = () => {
+    setFormData(prev => ({
+      ...prev,
+      items: [...prev.items, { description: '', quantity: 1, unitPrice: 0 }]
+    }));
+  };
+
+  const updateItem = (index, field, value) => {
+    const updatedItems = [...formData.items];
+    updatedItems[index][field] = field === 'quantity' || field === 'unitPrice' ? Number(value) : value;
+    setFormData(prev => ({ ...prev, items: updatedItems }));
+  };
+
+  const removeItem = (index) => {
+    const updatedItems = formData.items.filter((_, i) => i !== index);
+    setFormData(prev => ({ ...prev, items: updatedItems }));
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -42,7 +52,8 @@ function QuotationForm() {
         quotationDate: new Date().toISOString().split('T')[0],
         from: { businessName: '', phone: '', address: '', email: '' },
         to: { clientName: '', phone: '', address: '', email: '' },
-        notes: ''
+        notes: '',
+        items: []
       });
     } catch (error) {
       console.error("Error saving quote: ", error);
@@ -107,6 +118,14 @@ function QuotationForm() {
             {renderInput('to', 'email', 'Email', 'email', true)}
           </div>
         </section>
+
+        {/* Item List */}
+        <QuotationItemList
+          items={formData.items}
+          onAdd={addItem}
+          onUpdate={updateItem}
+          onRemove={removeItem}
+        />
 
         {/* Notes */}
         <section>
