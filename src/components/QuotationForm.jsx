@@ -33,7 +33,9 @@ function QuotationForm() {
 
   const updateItem = (index, field, value) => {
     const updatedItems = [...formData.items];
-    updatedItems[index][field] = field === 'quantity' || field === 'unitPrice' ? Number(value) : value;
+    updatedItems[index][field] = field === 'quantity' || field === 'unitPrice'
+      ? Number(value)
+      : value;
     setFormData(prev => ({ ...prev, items: updatedItems }));
   };
 
