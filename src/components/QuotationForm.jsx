@@ -81,20 +81,20 @@ function QuotationForm() {
   );
 
   return (
-    <div className="min-h-screen bg-gray-50 p-6 flex justify-center items-start">
-      <form onSubmit={handleSubmit} className="bg-white shadow-2xl rounded-2xl p-10 w-full max-w-4xl space-y-10">
+    <div className="min-h-screen bg-gray-50 p-4 sm:p-6 flex justify-center items-start">
+      <form onSubmit={handleSubmit} className="bg-white shadow-2xl rounded-2xl p-6 sm:p-10 w-full max-w-4xl space-y-10">
         
         {/* Header */}
-        <div className="flex justify-between items-center border-b pb-6">
-          <h1 className="text-4xl font-bold text-gray-800">🧾 Quotation</h1>
-          <div className="flex gap-4">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b pb-6 gap-4">
+          <h1 className="text-3xl sm:text-4xl font-bold text-gray-800">🧾 Quotation</h1>
+          <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
             <div>
               <label className="block text-sm font-medium text-gray-600">Quotation No.</label>
-              <input type="text" value={formData.quotationNo} className="bg-gray-100 p-2 rounded-lg w-32" readOnly />
+              <input type="text" value={formData.quotationNo} className="bg-gray-100 p-2 rounded-lg w-full sm:w-32" readOnly />
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-600">Date</label>
-              <input type="date" value={formData.quotationDate} className="bg-gray-100 p-2 rounded-lg" readOnly />
+              <input type="date" value={formData.quotationDate} className="bg-gray-100 p-2 rounded-lg w-full sm:w-auto" readOnly />
             </div>
           </div>
         </div>
@@ -102,7 +102,7 @@ function QuotationForm() {
         {/* Quotation From */}
         <section>
           <h2 className="text-xl font-semibold text-gray-700 mb-4">📤 Quotation From</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-6">
             {renderInput('from', 'businessName', 'Business Name', 'text', true)}
             {renderInput('from', 'phone', 'Phone', 'tel', true)}
             {renderInput('from', 'address', 'Address')}
@@ -113,7 +113,7 @@ function QuotationForm() {
         {/* Quotation For */}
         <section>
           <h2 className="text-xl font-semibold text-gray-700 mb-4">📥 Quotation For</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-6">
             {renderInput('to', 'clientName', 'Client Name', 'text', true)}
             {renderInput('to', 'phone', 'Phone', 'tel', true)}
             {renderInput('to', 'address', 'Address')}

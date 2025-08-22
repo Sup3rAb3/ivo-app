@@ -8,7 +8,7 @@ function QuotationItemList({ items, onAdd, onUpdate, onRemove }) {
     <section>
       <h2 className="text-xl font-semibold text-gray-700 mb-4">📦 Quotation Items</h2>
       {items.map((item, index) => (
-        <div key={index} className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4">
+        <div key={index} className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mb-4">
           <div>
             <label className="block text-sm text-gray-600 mb-1">Description</label>
             <input
@@ -59,7 +59,7 @@ function QuotationItemList({ items, onAdd, onUpdate, onRemove }) {
       <button
         type="button"
         onClick={onAdd}
-        className="mt-2 bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
+        className="w-full sm:w-auto mt-2 bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
       >
         ➕ Add Item
       </button>
